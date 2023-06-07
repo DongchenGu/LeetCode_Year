@@ -1,10 +1,10 @@
-package norbert.BinaryTree;
+package norbert.BinaryTree.Different_Traversal;
 
 import java.util.ArrayList;
 import java.util.List;
 
 //https://leetcode.com/problems/binary-tree-preorder-traversal/
-public class Binary_Tree_Preorder_Traversal {
+public class Preorder_Traversal_Recursion {
 
 
     //  Definition for a binary tree node.
@@ -22,23 +22,18 @@ public class Binary_Tree_Preorder_Traversal {
       }
 
     public List<Integer> preorderTraversal(TreeNode root) {
-        List<Integer> result = new ArrayList<>();
-        if(root!=null){
-            getPreOrderValue(result,root);
-        }
-
-
-        return result;
+          ArrayList<Integer> result = new ArrayList<>();
+          this.getCurrentValInPreOrder(root,result );
+          return result;
     }
 
-    public void getPreOrderValue(List<Integer> result, TreeNode root){
-        result.add(root.val);
-        if(root.left!=null){
-            getPreOrderValue(result,root.left);
-        }
-        if(root.right!=null){
-            getPreOrderValue(result,root.right);
-        }
+    public void getCurrentValInPreOrder(TreeNode current, ArrayList<Integer> result){
+          if(current==null){
+              return;
+          }
+          result.add(current.val);
+          getCurrentValInPreOrder(current.left,result);
+          getCurrentValInPreOrder(current.right,result);
     }
 
     }

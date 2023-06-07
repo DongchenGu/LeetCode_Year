@@ -26,4 +26,27 @@ public class Minimum_Size_Subarray_Sum {
 
         return outputLength;
     }
+
+//使用while循环来写
+    public int minSubArrayLen2(int target, int[] nums) {
+        int maxLength =0;
+        int left =0;
+        int right=0;
+        int sum=nums[0];
+
+        while(right<=nums.length-1){
+            if(sum<target){
+                right++;
+                if(right<=nums.length-1)
+                    sum+=nums[right];
+            }else{
+                if(maxLength==0 || maxLength>(right-left+1)){
+                    maxLength = right-left+1;
+                }
+                sum-= nums[left];
+                left++;
+            }
+        }
+        return maxLength;
+    }
 }

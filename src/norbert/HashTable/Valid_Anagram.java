@@ -1,5 +1,7 @@
 package norbert.HashTable;
 
+import java.util.HashMap;
+
 //https://leetcode.com/problems/valid-anagram/description/
 public class Valid_Anagram {
     public boolean isAnagram(String s, String t) {
@@ -25,5 +27,44 @@ public class Valid_Anagram {
 
         }
         return true;
+    }
+
+
+
+    public static boolean isAnagram2(String s, String t) {
+        HashMap<Character,Integer> hmap = new HashMap<>();
+        for(char i : s.toCharArray()){
+            if(hmap.containsKey(i)){
+                int temp = hmap.get(i);
+                temp++;
+                hmap.put(i,temp);
+            }else{
+                hmap.put(i, 1);
+            }
+
+        }
+        for(char i : t.toCharArray()){
+            if(hmap.containsKey(i) && hmap.get(i)>0){
+                int temp = hmap.get(i);
+                temp--;
+                if(temp == 0){
+                    hmap.remove(i);
+                }else{
+                    hmap.put(i,temp);
+                }
+            }else{
+                return false;
+            }
+        }
+        if(hmap.size()>0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public static void main(String[] args) {
+        boolean temp = isAnagram2("ab","a");
+        System.out.println(temp);
     }
 }

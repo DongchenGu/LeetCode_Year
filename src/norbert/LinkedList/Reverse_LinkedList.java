@@ -32,4 +32,45 @@ public class Reverse_LinkedList {
         return pre;
     }
 
+
+    //递归法方案1
+    public ListNode reverseList2(ListNode head) {
+        if(head == null || head.next ==null){
+            return head;
+        }else{
+            return swapBetween(null, head);
+        }
+    }
+    public ListNode swapBetween(ListNode pre, ListNode current){
+        if(current == null){
+            return pre;
+        }else{
+            ListNode temp = current.next;
+            current.next = pre;
+            return swapBetween(current, temp);
+        }
+    }
+
+    //递归法方案2
+    ListNode newHead = null;
+    public ListNode reverseList3(ListNode head) {
+        if(head == null || head.next ==null){
+            return head;
+        }else{
+            reverse(head);
+            head.next = null;
+            return newHead;
+        }
+    }
+    public ListNode reverse(ListNode remain){
+        if(remain.next == null){
+            newHead  = remain;
+            return remain;
+        }else{
+            ListNode temp = reverse(remain.next);
+            temp.next = remain;
+
+            return remain;
+        }
+    }
 }

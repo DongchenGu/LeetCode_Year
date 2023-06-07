@@ -30,4 +30,32 @@ public class Happy_Number {
         }
 
     }
+
+    public static  boolean isHappy2(int n) {
+        String N = String.valueOf(n);
+        HashSet<Integer> pool = new HashSet<>();
+        int sum = 0;
+
+        while(true){
+            for(int i =0; i<N.length(); i++){
+                int num = Integer.valueOf(N.charAt(i));
+                System.out.println("num:"+num);
+                int temp = num*num;
+                sum+=temp;
+            }
+            System.out.println(sum);
+            if(sum==1){
+                return true;
+            }
+            if(pool.contains(sum)){
+                return false;
+            }
+            N =String.valueOf(sum);
+            pool.add(sum);
+            sum=0;
+        }
+    }
+    public static void main(String[] args) {
+        isHappy2(19);
+    }
 }
