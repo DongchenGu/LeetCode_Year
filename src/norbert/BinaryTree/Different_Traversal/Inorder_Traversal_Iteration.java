@@ -22,6 +22,8 @@ public class Inorder_Traversal_Iteration {
         }
     }
 
+
+    //方法1
     public List<Integer> inorderTraversal(TreeNode root) {
         ArrayList<Integer> result = new ArrayList<>();
         Deque<TreeNode> deque = new ArrayDeque<>();
@@ -40,6 +42,27 @@ public class Inorder_Traversal_Iteration {
             }
         }
 
+        return result;
+    }
+
+
+    //方法2
+    public List<Integer> inorderTraversal2(TreeNode root) {
+        ArrayList<Integer> result = new ArrayList<>();
+        ArrayDeque<TreeNode> deque = new ArrayDeque<>();
+
+        TreeNode pointer = root;
+        while(pointer!=null || deque.size()>0){
+            if(pointer ==null){
+                pointer = deque.removeFirst();
+                result.add(pointer.val);
+                pointer= pointer.right;
+
+            }else{
+                deque.addFirst(pointer);
+                pointer = pointer.left;
+            }
+        }
         return result;
     }
 
