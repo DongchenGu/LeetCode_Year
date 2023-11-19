@@ -53,4 +53,24 @@ public class TargetSum {
          int result = findTargetSumWays(arg, 3);
          System.out.println(result);
     }
+
+
+    //一维DP数组的方式
+    public int findTargetSumWays2(int[] nums, int target) {
+        int sum=0;
+        for (int i = 0; i < nums.length; i++) sum += nums[i];
+        //如果target过大 sum将无法满足
+        if ( target > sum || target<-sum ) return 0;
+        if ((target + sum) % 2 != 0) return 0;
+
+        int backpack = (sum + target)/2;
+        int[] dp = new int[backpack+1];
+        dp[0] =1;
+        for(int i=0; i<nums.length; i++){
+            for(int j =backpack; j>=nums[i]; j--){
+                dp[j] += dp[j-nums[i]];
+            }
+        }
+        return dp[backpack];
+    }
 }
